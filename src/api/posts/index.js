@@ -10,3 +10,4 @@ posts.delete('/:id', postsCtrl.remove);
 posts.patch('/:id', postsCtrl.update);
 
 export default posts;
+//ffff
