@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from '@hapi/joi';
 import User from '../../models/user';
 
 /*
@@ -15,7 +15,7 @@ export const register = async (ctx) => {
     username: Joi.string().alphanum().min(3).max(20).required(), //required가 있으면 필수항목
     password: Joi.string().required(),
   });
-  const result = Joi.validate(ctx.request.body, schema);
+  const result = schema.validate(ctx.request.body);
   if (result.error) {
     ctx.status = 400;
     ctx.body = result.error;

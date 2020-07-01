@@ -1,6 +1,6 @@
 import Post from '../../models/post';
 import mongoose from 'mongoose';
-import Joi from 'joi';
+import Joi from '@hapi/joi';
 
 //잘못된 id를 전달했다면 클라이언트가 요청을 잘못 보낸 것이니 400 Bad Request 오류를 띄어 주는 것이 맞습니다
 //그러면 id 값이 올바른 ObjectId 인지 확인해야 하는데요
@@ -46,7 +46,7 @@ export const write = async (ctx) => {
   });
 
   //검증하고 나서 검증 실패인 경우 에러 처리
-  const result = Joi.validate(ctx.request.body, schema);
+  const result = schema.validate(ctx.request.body);
   if (result.error) {
     ctx.status = 400; // Bad Request
     ctx.body = result.error;
@@ -143,7 +143,7 @@ export const update = async (ctx) => {
   });
 
   //검증하고 나서 검증 실패인 경우 에러 처리
-  const result = Joi.validate(ctx.request.body, schema);
+  const result = schema.validate(ctx.request.body);
   if (result.error) {
     ctx.status = 400; // Bad Request
     ctx.body = result.error;
